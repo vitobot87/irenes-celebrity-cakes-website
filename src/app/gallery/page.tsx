@@ -148,7 +148,7 @@ export default function GalleryPage() {
             </Link>
             <nav className="hidden md:flex items-center gap-8">
               <Link href="/#about" className="text-sm font-medium text-gray-600 hover:text-burgundy dark:text-gray-300 dark:hover:text-gold transition-colors">About</Link>
-              <Link href="/#services" className="text-sm font-medium text-gray-600 hover:text-burgundy dark:text-gray-300 dark:hover:text-gold transition-colors">Services</Link>
+              <Link href="/menu" className="text-sm font-medium text-gray-600 hover:text-burgundy dark:text-gray-300 dark:hover:text-gold transition-colors">Menu</Link>
               <Link href="/gallery" className="text-sm font-medium text-burgundy dark:text-gold transition-colors">Gallery</Link>
               <Link href="/#reviews" className="text-sm font-medium text-gray-600 hover:text-burgundy dark:text-gray-300 dark:hover:text-gold transition-colors">Reviews</Link>
               <Link href="/#contact" className="text-sm font-medium text-gray-600 hover:text-burgundy dark:text-gray-300 dark:hover:text-gold transition-colors">Contact</Link>
