@@ -20,6 +20,7 @@ export function generateStaticParams() {
   ];
 }
 
-export default function CategoryPage({ params }: { params: { category: string } }) {
-  return <CategoryGallery categoryId={params.category} />;
+export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
+  const { category } = await params;
+  return <CategoryGallery categoryId={category} />;
 }
