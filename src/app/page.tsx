@@ -8,19 +8,46 @@ const services = [
   {
     title: "Wedding Cakes",
     description: "From classic elegance to modern masterpieces, we design the perfect centerpiece for your special day. Multi-tier cakes renowned for stunning presentation and unforgettable taste.",
-    image: `${basePath}/hero-wedding-cake.png`,
+    image: `${basePath}/gallery/wedding/WDC_000.png`,
   },
   {
     title: "Custom Celebration Cakes",
     description: "Milestone birthdays, baby showers, corporate events - we create custom cakes that capture the spirit of your celebration. Share your vision and watch it come to life.",
-    image: `${basePath}/hero-birthday-cake.png`,
+    image: `${basePath}/gallery/birthday/BDC_012.png`,
   },
   {
     title: "Italian Pastries & Desserts",
     description: "Step into our bakery and be transported to Italy. Authentic cannoli, sfogliatelle, tiramisu, and traditional Italian cookies - all made fresh daily.",
-    image: `${basePath}/hero-pastries.png`,
+    image: `${basePath}/gallery/pastries/d_003.jpg`,
   },
 ];
+
+const galleryImages = {
+  wedding: [
+    `${basePath}/gallery/wedding/WDC_000.png`,
+    `${basePath}/gallery/wedding/WDC_003.png`,
+    `${basePath}/gallery/wedding/WDC_007.png`,
+    `${basePath}/gallery/wedding/WDC_010.png`,
+    `${basePath}/gallery/wedding/WDC_015.png`,
+    `${basePath}/gallery/wedding/WDC_020.png`,
+  ],
+  birthday: [
+    `${basePath}/gallery/birthday/BDC_005.png`,
+    `${basePath}/gallery/birthday/BDC_012.png`,
+    `${basePath}/gallery/birthday/BDC_025.png`,
+    `${basePath}/gallery/birthday/BDC_030.png`,
+    `${basePath}/gallery/birthday/BDC_045.png`,
+    `${basePath}/gallery/birthday/BDC_050.png`,
+  ],
+  custom: [
+    `${basePath}/gallery/custom/CCD_000.png`,
+    `${basePath}/gallery/custom/CCD_005.png`,
+    `${basePath}/gallery/custom/CCD_010.png`,
+    `${basePath}/gallery/custom/CCD_015.png`,
+    `${basePath}/gallery/custom/CCD_020.png`,
+    `${basePath}/gallery/custom/CCD_025.png`,
+  ],
+};
 
 const testimonials = [
   {
@@ -69,6 +96,7 @@ export default function Home() {
             <nav className="hidden md:flex items-center gap-8">
               <a href="#about" className="text-sm font-medium text-gray-600 hover:text-burgundy dark:text-gray-300 dark:hover:text-gold transition-colors">About</a>
               <a href="#services" className="text-sm font-medium text-gray-600 hover:text-burgundy dark:text-gray-300 dark:hover:text-gold transition-colors">Services</a>
+              <a href="#gallery" className="text-sm font-medium text-gray-600 hover:text-burgundy dark:text-gray-300 dark:hover:text-gold transition-colors">Gallery</a>
               <a href="#reviews" className="text-sm font-medium text-gray-600 hover:text-burgundy dark:text-gray-300 dark:hover:text-gold transition-colors">Reviews</a>
               <a href="#contact" className="text-sm font-medium text-gray-600 hover:text-burgundy dark:text-gray-300 dark:hover:text-gold transition-colors">Contact</a>
             </nav>
@@ -86,10 +114,10 @@ export default function Home() {
       <section className="relative pt-20 sm:pt-24 min-h-screen flex items-center">
         <div className="absolute inset-0 z-0">
           <Image
-            src={`${basePath}/hero-wedding-cake.png`}
-            alt="Elegant wedding cake"
+            src={`${basePath}/gallery/wedding/WDC_007.png`}
+            alt="Elegant wedding cake by Irene's Celebrity Cakes"
             fill
-            className="object-cover"
+            className="object-cover object-center"
             priority
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
@@ -213,6 +241,86 @@ export default function Home() {
               className="inline-flex items-center justify-center bg-burgundy hover:bg-burgundy/90 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
             >
               Inquire About Custom Orders
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery Section */}
+      <section id="gallery" className="py-20 sm:py-28 bg-cream dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-burgundy dark:text-gold mb-4">Our Creations</h2>
+            <p className="text-gray-600 dark:text-gray-300 text-lg max-w-2xl mx-auto">
+              Browse our gallery of handcrafted cakes - each one made with love and attention to detail.
+            </p>
+          </div>
+
+          {/* Wedding Cakes */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold text-burgundy dark:text-gold mb-6 text-center">Wedding Cakes</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {galleryImages.wedding.map((img, index) => (
+                <div key={index} className="relative aspect-square rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow group">
+                  <Image
+                    src={img}
+                    alt={`Wedding cake ${index + 1}`}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Birthday Cakes */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold text-burgundy dark:text-gold mb-6 text-center">Birthday & Celebration Cakes</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {galleryImages.birthday.map((img, index) => (
+                <div key={index} className="relative aspect-square rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow group">
+                  <Image
+                    src={img}
+                    alt={`Birthday cake ${index + 1}`}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Custom Cakes */}
+          <div>
+            <h3 className="text-2xl font-bold text-burgundy dark:text-gold mb-6 text-center">Custom Designs</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {galleryImages.custom.map((img, index) => (
+                <div key={index} className="relative aspect-square rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow group">
+                  <Image
+                    src={img}
+                    alt={`Custom cake ${index + 1}`}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-12 text-center">
+            <p className="text-gray-600 dark:text-gray-300 mb-4">
+              This is just a sample of our work. Visit our bakery to see more or follow us on Instagram!
+            </p>
+            <a
+              href="https://www.instagram.com/irenescelebritycakes"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center bg-burgundy hover:bg-burgundy/90 text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+            >
+              <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+              View More on Instagram
             </a>
           </div>
         </div>
