@@ -2,130 +2,112 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 
 const basePath = process.env.NODE_ENV === "production" ? "/irenes-celebrity-cakes-website" : "";
-
-// Generate image arrays for each category
-const generateImageArray = (prefix: string, count: number, ext: string = "png", startAt: number = 0) => {
-  return Array.from({ length: count }, (_, i) => {
-    const num = (startAt + i).toString().padStart(3, "0");
-    return `${prefix}_${num}.${ext}`;
-  });
-};
 
 const categories = [
   {
     id: "wedding",
     name: "Wedding Cakes",
     description: "Elegant multi-tier masterpieces for your special day",
-    images: generateImageArray("WDC", 32),
-    folder: "wedding",
+    count: 32,
+    featuredImage: "WDC_007.png",
   },
   {
     id: "birthday",
     name: "Birthday Cakes",
     description: "Celebrate another year with a custom creation",
-    images: generateImageArray("BDC", 60),
-    folder: "birthday",
+    count: 60,
+    featuredImage: "BDC_012.png",
   },
   {
     id: "custom",
     name: "Custom Designs",
     description: "Unique cakes tailored to your vision",
-    images: generateImageArray("CCD", 30),
-    folder: "custom",
+    count: 30,
+    featuredImage: "CCD_005.png",
   },
   {
     id: "anniversary",
     name: "Anniversary Cakes",
     description: "Celebrate milestones with timeless elegance",
-    images: generateImageArray("AC", 20),
-    folder: "anniversary",
+    count: 20,
+    featuredImage: "AC_005.png",
   },
   {
     id: "babyshower",
     name: "Baby Shower Cakes",
     description: "Welcome the little one in sweet style",
-    images: generateImageArray("BYC", 27),
-    folder: "babyshower",
+    count: 27,
+    featuredImage: "BYC_010.png",
   },
   {
     id: "baptism",
     name: "Baptism Cakes",
     description: "Blessed celebrations deserve beautiful cakes",
-    images: generateImageArray("BPC", 22),
-    folder: "baptism",
+    count: 22,
+    featuredImage: "BPC_005.png",
   },
   {
     id: "bridal",
     name: "Bridal Shower Cakes",
     description: "Elegant treats for the bride-to-be",
-    images: generateImageArray("BSC", 22),
-    folder: "bridal",
+    count: 22,
+    featuredImage: "BSC_008.png",
   },
   {
     id: "communion",
     name: "Communion Cakes",
     description: "Sacred celebrations with heavenly cakes",
-    images: generateImageArray("CMC", 19),
-    folder: "communion",
+    count: 19,
+    featuredImage: "CMC_005.png",
   },
   {
     id: "confirmation",
     name: "Confirmation Cakes",
     description: "Mark this important milestone",
-    images: generateImageArray("CFC", 15),
-    folder: "confirmation",
+    count: 15,
+    featuredImage: "CFC_005.png",
   },
   {
     id: "cupcakes",
     name: "Cupcakes",
     description: "Perfect individual treats for any occasion",
-    images: generateImageArray("CCC", 12),
-    folder: "cupcakes",
+    count: 12,
+    featuredImage: "CCC_003.png",
   },
   {
     id: "doll",
     name: "Doll Cakes",
     description: "Whimsical princess and doll-themed creations",
-    images: generateImageArray("DLC", 15),
-    folder: "doll",
+    count: 15,
+    featuredImage: "DLC_005.png",
   },
   {
     id: "edible",
     name: "Edible Image Cakes",
     description: "Custom photo cakes for personalized celebrations",
-    images: generateImageArray("EIC", 20),
-    folder: "edible",
+    count: 20,
+    featuredImage: "EIC_008.png",
   },
   {
     id: "engagement",
     name: "Engagement Cakes",
     description: "Celebrate saying yes with something sweet",
-    images: generateImageArray("EGC", 23),
-    folder: "engagement",
+    count: 23,
+    featuredImage: "EGC_010.png",
   },
   {
     id: "desserts",
     name: "Italian Pastries & Desserts",
     description: "Authentic Italian treats made fresh daily",
-    images: [
-      "d_000.jpg", "d_001.jpg", "d_002.jpg", "d_003.jpg", "d_004.jpg",
-      "d_005.jpg", "d_006.jpg", "d_007.jpg", "d_009.jpg", "d_010.jpg",
-      "easter2.png", "xmas2.png", "zep.jpg"
-    ],
-    folder: "desserts",
+    count: 13,
+    featuredImage: "d_003.jpg",
   },
 ];
 
 export default function GalleryPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
-
-  const filteredCategories = selectedCategory
-    ? categories.filter((c) => c.id === selectedCategory)
-    : categories;
+  const totalImages = categories.reduce((acc, c) => acc + c.count, 0);
 
   return (
     <div className="min-h-screen bg-background">
@@ -168,99 +150,47 @@ export default function GalleryPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl sm:text-5xl font-bold text-burgundy dark:text-gold mb-4">Our Gallery</h1>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Browse through 330+ photos of our handcrafted cakes and pastries. Each creation is made with love and attention to detail.
+            Browse {totalImages}+ photos of our handcrafted cakes and pastries across {categories.length} categories. Click any category to see more.
           </p>
         </div>
       </section>
 
-      {/* Category Filter */}
-      <section className="sticky top-16 sm:top-20 z-40 bg-white/95 dark:bg-gray-950/95 backdrop-blur-sm border-b border-gray-100 dark:border-gray-800 py-4">
+      {/* Category Grid */}
+      <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-            <button
-              onClick={() => setSelectedCategory(null)}
-              className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
-                selectedCategory === null
-                  ? "bg-burgundy text-white"
-                  : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
-              }`}
-            >
-              All ({categories.reduce((acc, c) => acc + c.images.length, 0)})
-            </button>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {categories.map((category) => (
-              <button
+              <Link
                 key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
-                  selectedCategory === category.id
-                    ? "bg-burgundy text-white"
-                    : "bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
-                }`}
+                href={`/gallery/${category.id}`}
+                className="group bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
               >
-                {category.name} ({category.images.length})
-              </button>
+                <div className="relative aspect-square overflow-hidden">
+                  <Image
+                    src={`${basePath}/gallery/${category.id}/${category.featuredImage}`}
+                    alt={category.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <span className="inline-block bg-burgundy/90 text-white text-xs font-medium px-2 py-1 rounded-full">
+                      {category.count} photos
+                    </span>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <h2 className="text-lg font-bold text-burgundy dark:text-gold mb-1 group-hover:text-burgundy/80 dark:group-hover:text-gold/80 transition-colors">
+                    {category.name}
+                  </h2>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">{category.description}</p>
+                </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
-
-      {/* Gallery Grid */}
-      <section className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {filteredCategories.map((category) => (
-            <div key={category.id} className="mb-16">
-              <div className="mb-6">
-                <h2 className="text-2xl font-bold text-burgundy dark:text-gold">{category.name}</h2>
-                <p className="text-gray-600 dark:text-gray-300">{category.description}</p>
-              </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
-                {category.images.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setLightboxImage(`${basePath}/gallery/${category.folder}/${image}`)}
-                    className="relative aspect-square rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow group cursor-pointer"
-                  >
-                    <Image
-                      src={`${basePath}/gallery/${category.folder}/${image}`}
-                      alt={`${category.name} ${index + 1}`}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, (max-width: 1280px) 20vw, 16vw"
-                    />
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
-                  </button>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Lightbox */}
-      {lightboxImage && (
-        <div
-          className="fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"
-          onClick={() => setLightboxImage(null)}
-        >
-          <button
-            className="absolute top-4 right-4 text-white hover:text-gold transition-colors"
-            onClick={() => setLightboxImage(null)}
-          >
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-          <div className="relative max-w-4xl max-h-[90vh] w-full h-full">
-            <Image
-              src={lightboxImage}
-              alt="Cake detail"
-              fill
-              className="object-contain"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </div>
-        </div>
-      )}
 
       {/* CTA */}
       <section className="py-16 bg-burgundy">
