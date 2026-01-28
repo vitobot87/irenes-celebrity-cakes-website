@@ -85,9 +85,9 @@ export default function Home() {
               <Image
                 src={`${basePath}/logo.png`}
                 alt="Irene's Celebrity Cakes"
-                width={48}
-                height={48}
-                className="rounded-lg"
+                width={40}
+                height={40}
+                className="rounded-lg ml-1"
               />
               <div className="hidden sm:block">
                 <h1 className="text-lg font-semibold text-burgundy dark:text-gold">Irene&apos;s Celebrity Cakes</h1>
